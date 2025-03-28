@@ -2,7 +2,7 @@ package models;
 
 import exceptions.InvalidBotCountException;
 import exceptions.InvalidPlayerCountException;
-import stratergies.winningstrategies.WinningStratergy;
+import stratergies.winningstratergies.WinningStratergy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +80,31 @@ public class Game {
         this.gameSate = GameSate.IN_PROGRESS;
         this.nextPlayerMoveIndex = nextPlayerMoveIndex;
         this.winningStratergies = winningStrategies;
+    }
+    public void makeMove(){
+        Player currentplayer = players.get(nextPlayerMoveIndex);
+        System.out.println("Current player name is :" + currentplayer.getName());
+
+        Move move = currentplayer.makeMove(board);
+
+        System.out.println("Player want make a move at" + move.getCell().getRow() + " " + move.getCell().getCol());
+
+
+        //add a player in the board
+        int row = move.getCell().getRow();
+        int col = move.getCell().getCol();
+        Cell celltochange = board.getBoard().get(row).get(col);
+        celltochange.setPlayers(currentplayer);
+        celltochange.setCellState(CellState.FILLED);
+
+
+        //maintain the list of moves
+        Move finalMoveObject = new Move(currentplayer, celltochange);
+        moves.add(finalMoveObject);
+
+        //update the player
+        nextPlayerMoveIndex++;
+        nextPlayerMoveIndex %= players.size();
     }
 
     public static Builder getBuilder(){

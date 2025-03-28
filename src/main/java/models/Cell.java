@@ -44,4 +44,13 @@ public class Cell {
     public void setPlayers(Player players) {
         this.players = players;
     }
+
+    public void printCell(){
+        if (players == null){
+            System.out.println("| |");
+        }
+        else {
+            System.out.println("|" + players.getSymbol().getaChar() + "|");
+        }
+    }
 }

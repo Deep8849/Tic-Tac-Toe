@@ -4,7 +4,7 @@ import exceptions.InvalidBotCountException;
 import exceptions.InvalidPlayerCountException;
 import models.Game;
 import models.Player;
-import stratergies.winningstrategies.WinningStratergy;
+import stratergies.winningstratergies.WinningStratergy;
 
 import java.util.List;
 
@@ -21,11 +21,14 @@ public class GameController {
     public Player getWinner(){
         return null;
     }
-    public void  printGame(){
+    public void  printGame(Game game){
+        game.getBoard().printBoard();
 
     }
 
-    public void makeMove(){
+    public void makeMove(Game game){
+        game.makeMove();
+
 
     }
     public void undo(){
